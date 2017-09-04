@@ -3,17 +3,14 @@ language: bash
 services: docker
 
 env:
-  - VERSION=7.1 VARIANT=apache
-  - VERSION=7.1 VARIANT=cli
+  - VERSION=7.1
 
 before_script:
-  - env | sort
   - cd "src/$VERSION"
-  - IMAGE_NAME="php:${VERSION}${VARIANT:+-$VARIANT}"
-  - IMAGE_NAME="${IMAGE_NAME//'/'/-}"
+  - IMAGE_NAME="php:${VERSION}"
 
 script:
-  - travis_retry docker build -t "$IMAGE_NAME" "${VARIANT:-.}"
+  - travis_retry docker build -t "$IMAGE_NAME" .
 
 after_script:
   - docker images
