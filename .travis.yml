@@ -1,0 +1,21 @@
+language: bash
+
+services: docker
+
+env:
+  - VERSION=7.1 VARIANT=apache
+  - VERSION=7.1 VARIANT=cli
+
+before_script:
+  - env | sort
+  - cd "src/$VERSION"
+  - IMAGE_NAME="php:${VERSION}${VARIANT:+-$VARIANT}"
+  - IMAGE_NAME="${IMAGE_NAME//'/'/-}"
+
+script:
+  - travis_retry docker build -t "$IMAGE_NAME" "${VARIANT:-.}"
+
+after_script:
+  - docker images
+
+# vim:set et ts=2 sw=2:
