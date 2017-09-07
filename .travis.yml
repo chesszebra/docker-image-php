@@ -13,7 +13,7 @@ env:
 before_script:
   - if [[ "$VERSION" != "latest" ]]; then cd "src/$VERSION"; fi
   - if [[ "$VERSION" == "latest" ]]; then cd "src/$VERSION_ALIAS"; fi
-  - IMAGE_NAME="chesszebra/$(echo "$TRAVIS_REPO_SLUG" | cut -c 25-)"
+  - IMAGE_NAME="chesszebra/$(echo "$TRAVIS_REPO_SLUG" | cut -c 25-):${VERSION}"
 
 script:
   - docker build -t "$IMAGE_NAME" .
