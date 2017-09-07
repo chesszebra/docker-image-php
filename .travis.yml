@@ -3,16 +3,27 @@ language: bash
 services: docker
 
 env:
-  - VERSION=7.1
+  global:
+    - secure: "RKPiEPPZGli9+Bi0gXsSIocK1bfFIlhPOh+a30/Xuo6xbKNz7w4YMrcWLTRKIBDaleSJyoWwXrRSpfHwzs6Pd4s7ls49o8ACZg+Hv166UyoZEPNVjHoJE6gbR8LO/8PRxfP90oeSTTq6F2sQejYP54xBohDd59TI67QS1Da97Zg4KU/jM3dEBlIeKQAjfQqt/iDobSDj3d9qpgn4meikWgS4ZYDv6yhnVATeScHNq7h7YvJYbfTZiZP4myUbohF2fYra053SH4lpENOmbFo3ow75AD4IgRt2hNqA6jQEYHp5AobeGNpwYPXAkFgDgiL5FeC3cJdLi8/8RHprzg62sFq/wB7R3rUvhQmgfUmZDrdrKWXOQaFUrIyTdNSZYebGwR3sgrY8I03STqjXv2hLAWH47qmmdVf3rfDAGMQyUxJax4xxyT7TAwOOlz/jVRe59PGjtYXt1JSOkEDHz0AAVriTOB766KL1FC0ibMtKU7mecfwpFFBwsqLlGaDzXucrFl1Xi0/M1s/0VTLQHCWCA/VhgAU2gCW9P/l6djHrV39VtVtNFzLNc5D0/SvHerQ+jvQwM2dcOkO6wqCYOtgi2c7te/opDqXLxIpoURz4qKLsuxS1iva2x4c2kvkS0KFrenP8qEH415fXrcTRoPk9/6F9VUPND18jK9xpQ85ml1A="
+    - secure: "l3Dlz2RU3JJU+Hzcqe7H7UykGZPYIvSw5IVgJ5jfLSDDJn/BGkurtljPpONUcbDyhgL1OX7WEUYZTKakIxWBk+5MWenhAsTQ2Jlwv9sz2QLl/SoMjNEbluk6CTsa24J3M7drvoqphofMeo2bgNe5crJlcqF9N0Pj3ysDA7AjQTqRK8OtMS8k74ji8fG21xj6CoquqabfIMGOr4sayKAKjN9ITjshgj/rnMiPRCBja9nEffTIdjKb6kd6b9hRlVDtkZsnnzk5lL2cuFS6aD9TbowTBgflKtZUzSjmbfBwk17kz4eLZyormue5bkZ6210+Qd0Vt43FpVJO+BCEvBElfOhG6xwV6Cf2WFG2YEIjmMsxV1gvhOSvRXtuBvjGdl4RM/K/XFz1pz5nn8jKKR91+kCKVT9dZJL+O2uxVjAU4BJa+NLyntIsNZAVFQ/b0BYu33BuscYV/n+A7aBZBV/5JuwCLy3If8yrD+kWhve+AZqKBRGNO7xvK8ONhr0/FATKbSzNL3ghBgOvJC6RVedwlpRz96c59/LnesYT6WMaPv/Kz01DOzJtmDOhEPRXdpHUlbG7BdsNC2dhomFyeakng9nkGS+GK6daWCF2co+OJMf+j8bg7LZs4fvtavHtnBXx/hSwQ6d1148g2PxOeSyQ9XYcrCfIylUq0Cjndw80KnE="
+  matrix:
+    - VERSION=7.1
+    - VERSION=latest VERSION_ALIAS=7.1
 
 before_script:
-  - cd "src/$VERSION"
-  - IMAGE_NAME="php:${VERSION}"
+  - if [[ "$VERSION" != "latest" ]]; then cd "src/$VERSION"; fi
+  - if [[ "$VERSION" == "latest" ]]; then cd "src/$VERSION_ALIAS"; fi
+  - IMAGE_NAME="chesszebra/php:${VERSION}"
 
 script:
   - travis_retry docker build -t "$IMAGE_NAME" .
 
+after_success:
+  - docker login --username $DOCKER_USER --password $DOCKER_PASS
+  - docker push $IMAGE_NAME
+
 after_script:
   - docker images
 
-# vim:set et ts=2 sw=2:
+notifications:
+  email: false
