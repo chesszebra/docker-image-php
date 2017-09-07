@@ -16,7 +16,7 @@ before_script:
   - IMAGE_NAME="chesszebra/php:${VERSION}"
 
 script:
-  - travis_retry docker build -t "$IMAGE_NAME" .
+  - docker build -t "$IMAGE_NAME" .
 
 after_success:
   - docker login --username $DOCKER_USER --password $DOCKER_PASS
