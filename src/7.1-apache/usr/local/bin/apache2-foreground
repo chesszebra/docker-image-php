@@ -4,7 +4,14 @@
 set -e
 
 # Replace the server name
-sed -i "s!www.example.com!$DOMAIN_NAME!g" /etc/apache2/sites-available/000-default.conf
+if [ "$DOMAIN_NAME" != "" ]; then
+    sed -i "s!www.example.com!$DOMAIN_NAME!g" /etc/apache2/sites-available/000-default.conf
+fi
+
+# Replace the public directory
+if [ "$PUBLIC_DIR" != "" ]; then
+    sed -i "s!/var/www/html/public!$PUBLIC_DIR!g" /etc/apache2/sites-available/000-default.conf
+fi
 
 # Create the SSL certificate
 if [ ! -f "/etc/ssl/private/ssl-cert-snakeoil.key" ]; then
