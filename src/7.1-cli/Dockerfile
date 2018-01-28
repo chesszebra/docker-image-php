@@ -69,7 +69,8 @@ RUN docker-php-ext-configure intl \
     zip \
  && docker-php-ext-enable \
     apcu \
-    memcached
+    memcached \
+    mongodb
 
 # Run the container as the configured user
 USER php:php

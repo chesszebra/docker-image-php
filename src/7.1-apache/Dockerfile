@@ -71,6 +71,7 @@ RUN docker-php-ext-configure intl \
  && docker-php-ext-enable \
     apcu \
     memcached \
+    mongodb \
     xdebug
 
 # The new script to copy, needed since we generate an SSL certificate in it
