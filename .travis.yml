@@ -9,6 +9,7 @@ env:
   matrix:
     - VERSION=7.0-apache
     - VERSION=7.0-cli
+    - VERSION=7.0-fpm
     - VERSION=7.1-apache
     - VERSION=7.1-cli
     - VERSION=latest VERSION_ALIAS=7.1-cli
