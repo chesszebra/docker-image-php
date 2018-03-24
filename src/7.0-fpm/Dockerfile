@@ -54,3 +54,16 @@ RUN docker-php-ext-configure intl \
     memcached \
     mongodb \
     xdebug
+
+# Create a custom user to run the container on
+RUN useradd php \
+ && mkdir -p /home/php \
+ && touch /home/php/.profile \
+ && chown -R php:php /home/php \
+ && mkdir /data \
+ && chown -R php:php /data \
+ && usermod -u 1000 php \
+ && groupmod -g 1000 php
+
+# Install the FPM settings
+COPY usr/local/etc/php-fpm.d/90-user.conf /usr/local/etc/php-fpm.d/90-user.conf
