@@ -12,7 +12,7 @@ RUN apt-get update \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libmemcached-dev \
-    libpng12-dev \
+    libpng-dev \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \
