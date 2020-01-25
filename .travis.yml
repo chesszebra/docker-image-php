@@ -12,7 +12,9 @@ env:
     - VERSION=7.0-fpm
     - VERSION=7.1-apache
     - VERSION=7.1-cli
-    - VERSION=latest VERSION_ALIAS=7.1-cli
+    - VERSION=7.2-apache
+    - VERSION=7.2-cli
+    - VERSION=latest VERSION_ALIAS=7.2-cli
 
 before_script:
   - if [[ "$VERSION" != "latest" ]]; then cd "src/$VERSION"; fi
