@@ -29,9 +29,8 @@ RUN apt-get update \
     libgmp-dev \
     libicu-dev \
     libjpeg62-turbo-dev \
-    libmcrypt-dev \
     libmemcached-dev \
-    libpng12-dev \
+    libpng-dev \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \
@@ -39,7 +38,7 @@ RUN apt-get update \
     zlib1g-dev
 
 # Install PECL extensions
-RUN pecl channel-update pecl.php.net && pecl install apcu-5.1.8 memcached mongodb xdebug
+RUN pecl channel-update pecl.php.net && pecl install memcached xdebug
 
 # Install PHP extensions
 RUN docker-php-ext-configure intl \
@@ -48,7 +47,6 @@ RUN docker-php-ext-configure intl \
     --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ \
     --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ \
     --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-    --with-vpx-dir=/usr/lib/x86_64-linux-gnu/ \
  && docker-php-ext-install \
     bcmath \
     bz2 \
@@ -58,7 +56,6 @@ RUN docker-php-ext-configure intl \
     gettext \
     intl \
     mbstring \
-    mcrypt \
     mysqli \
     opcache \
     pdo_mysql \
@@ -69,9 +66,7 @@ RUN docker-php-ext-configure intl \
     sysvshm \
     zip \
  && docker-php-ext-enable \
-    apcu \
     memcached \
-    mongodb \
     xdebug
 
 # The new script to copy, needed since we generate an SSL certificate in it
