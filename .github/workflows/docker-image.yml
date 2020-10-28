@@ -9,7 +9,7 @@ on:
     - cron: '0 0 * * 0'
 
 jobs:
-  Build PHP 7.2 Apache:
+  build-php72-apache:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
           docker push $IMAGE_NAME
           docker push $IMAGE_NAME_LATEST
 
-  Build PHP 7.2 CLI:
+  build-php72-cli:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -51,7 +51,7 @@ jobs:
           docker push $IMAGE_NAME
           docker push $IMAGE_NAME_LATEST
 
-  Build PHP 7.3 CLI:
+  build-php73-cli:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -70,7 +70,7 @@ jobs:
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
-  Build PHP 7.4 CLI:
+  build-php74-cli:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
