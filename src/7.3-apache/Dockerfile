@@ -34,11 +34,13 @@ RUN apt-get update \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \
+    libzip-dev \
     pkg-config \
     zlib1g-dev
 
 # Install PECL extensions
-RUN pecl channel-update pecl.php.net && pecl install memcached xdebug
+RUN pecl channel-update pecl.php.net \
+ && pecl install memcached xdebug
 
 # Install PHP extensions
 RUN docker-php-ext-configure intl \
