@@ -44,11 +44,11 @@ RUN pecl channel-update pecl.php.net \
 
 # Install PHP extensions
 RUN docker-php-ext-configure intl \
- && docker-php-ext-configure gmp --with-gmp=/usr/include/x86_64-linux-gnu \
+ && docker-php-ext-configure gmp \
  && docker-php-ext-configure gd \
-    --with-freetype-dir=/usr/lib/x86_64-linux-gnu/ \
-    --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ \
-    --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
+    --with-freetype=/usr/lib/x86_64-linux-gnu/ \
+    --with-jpeg=/usr/lib/x86_64-linux-gnu/ \
+    --with-xpm=/usr/lib/x86_64-linux-gnu/ \
  && docker-php-ext-install \
     bcmath \
     bz2 \
