@@ -15,6 +15,7 @@ RUN apt-get update \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \
+    libzip-dev \
     pkg-config \
     zlib1g-dev
 
