@@ -31,6 +31,7 @@ RUN apt-get update \
     libjpeg62-turbo-dev \
     libmemcached-dev \
     libpng-dev \
+    libpq-dev \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \

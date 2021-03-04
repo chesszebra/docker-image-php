@@ -32,6 +32,7 @@ RUN apt-get update \
     libmemcached-dev \
     libonig-dev \
     libpng-dev \
+    libpq-dev \
     libssl-dev \
     libvpx-dev \
     libxpm-dev \
