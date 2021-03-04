@@ -58,6 +58,7 @@ RUN docker-php-ext-configure intl \
     mysqli \
     opcache \
     pdo_mysql \
+    pdo_pgsql \
     shmop \
     sockets \
     sysvmsg \
